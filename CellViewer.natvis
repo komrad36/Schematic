@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="Cell">
+    <DisplayString Condition="type == Type::Void">(Void)</DisplayString>
+    <DisplayString Condition="type == Type::I32">{{I32}} {i32} </DisplayString>
+    <DisplayString Condition="type == Type::F32">{{F32}} {f32} </DisplayString>
+    <DisplayString Condition="type == Type::Sym">{{Sym}} {g_pool[iStr]} ({iStr})</DisplayString>
+    <DisplayString Condition="type == Type::Str">{{Str}} {g_pool[iStr]} ({iStr})</DisplayString>
+    <DisplayString Condition="type == Type::List">{{List}} {{ size={list.size()} }}</DisplayString>
+    <DisplayString Condition="type == Type::Cfp">{{Cfp}} {cfp} </DisplayString>
+    <DisplayString Condition="type == Type::Proc">{{Proc}}</DisplayString>
+    <DisplayString Condition="type == Type::Pair">{{Pair}}</DisplayString>
+    <Expand HideRawView="true">
+      <ArrayItems Condition="type == Type::List &amp;&amp; list.size()">
+        <Size>list.size()</Size>
+        <ValuePointer>&amp;list[0]</ValuePointer>
+      </ArrayItems>
+      <Item Condition="type == Type::Proc" Name="parms">list[1]</Item>
+      <Item Condition="type == Type::Proc" Name="body">list[2]</Item>
+      <Item Condition="type == Type::Proc" Name="env">g_env[iEnv]</Item>
+      <Item Condition="type == Type::Pair" Name="first">list[0]</Item>
+      <Item Condition="type == Type::Pair" Name="second">list[1]</Item>
+    </Expand>
+  </Type>
+  <Type Name="Env">
+    <DisplayString>{{Env}} {{ size={_List._Mypair._Myval2._Mysize} }}</DisplayString>
+    <Expand HideRawView="true">
+      <LinkedListItems>
+        <Size>_List._Mypair._Myval2._Mysize</Size>
+        <HeadPointer>_List._Mypair._Myval2._Myhead-&gt;_Next</HeadPointer>
+        <NextPointer>_Next</NextPointer>
+        <ValueNode Name="{g_pool[_Myval.first]}">_Myval.second</ValueNode>
+      </LinkedListItems>
+    </Expand>
+  </Type>
+</AutoVisualizer>
