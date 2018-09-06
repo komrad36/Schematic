@@ -1,6 +1,8 @@
 # Schematic #
 Basic toy Lisp interpreter in a few hundred lines of C++.
 
+All functionality is contained in `main.cpp`. There's also a handy NatVis for natural human-readable viewing of Schematic Cells in Visual Studio, found in `CellViewer.natvis`. 
+
 ## Explanation of Source Code ##
 
 ```cpp
