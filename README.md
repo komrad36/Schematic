@@ -1,6 +1,8 @@
 # Schematic #
 Basic toy Lisp interpreter in a few hundred lines of C++.
 
+![picture alt](https://github.com/komrad36/Schematic/blob/master/Schematic.gif "Animated Gif of Schematic Unit Tests, Error Handling, and Basic Functionality")
+
 All functionality is contained in `main.cpp`. There's also a handy NatVis for natural human-readable viewing of Schematic Cells in Visual Studio, found in `CellViewer.natvis`. 
 
 ## Explanation of Source Code ##
