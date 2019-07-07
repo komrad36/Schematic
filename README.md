@@ -1,6 +1,8 @@
 # Schematic #
 Basic toy Lisp interpreter in a few hundred lines of C++.
 
+![picture alt](https://github.com/komrad36/Schematic/blob/master/Schematic.gif "Animated Gif of Schematic Unit Tests, Error Handling, and Basic Functionality")
+
 All functionality is contained in `main.cpp`. There's also a handy NatVis for natural human-readable viewing of Schematic Cells in Visual Studio, found in `CellViewer.natvis`. 
 
 ## Explanation of Source Code ##
@@ -175,7 +177,7 @@ template<class T> Cell math_func(Err err, T op, const List& args) {
 	return is_int ? Cell(iAccum, err) : Cell(fAccum, err);
 }
 ```
-These are binding helpers that make it easier to define built-in functions that fit a certain pattern in terms of existing C/C++ functions. `binary-bool-func` is for functions which take two numbers (either floats or ints) and return a bool, i.e. comparison operators. It verifies the arguments are of one of the two permissible types, and also follows promotion rules - if both args are integers, it performs an ineteger comparison; otherwise, it performs a float comparison.
+These are binding helpers that make it easier to define built-in functions that fit a certain pattern in terms of existing C/C++ functions. `binary_bool_func` is for functions which take two numbers (either floats or ints) and return a bool, i.e. comparison operators. It verifies the arguments are of one of the two permissible types, and also follows promotion rules - if both args are integers, it performs an ineteger comparison; otherwise, it performs a float comparison.
 
 `math_func` is for functions which take an arbitrary number of numbers and return a number, i.e. basic math operations in Scheme like + or -. It verifies the arguments and similarly follows promotion rules.
 
@@ -328,7 +330,7 @@ Cell parse_categorize(const String& S, const Err err) {
 	return S.empty() || S[0] != '"' ? Cell(intern(S), err) : Cell(AsString(), intern(S.substr(1)), err);
 }
 ```
-Construct a Cell from a single String token. If it's an integer, make an integer cell. If it's a float, make a float cell. Otherwise, make a Symbol cell, or a String cell if it's the empty string or in double quotes.
+Construct a Cell from a single String token. If it's an integer, make an integer cell. If it's a float, make a float cell. Otherwise, make a Symbol cell, or a String cell if it's in double quotes.
 
 ```cpp
 void parse_emplace(List& list, Cell c) {
