@@ -268,6 +268,7 @@ If the symbol is "set!", evaluate the third argument and bind the second argumen
 ```cpp
 if (s == STR_lambda) {
   REQUIRE(x.list.size() == 3, ERR_arg_count_mismatch, x, false, 3, (I32)x.list.size());
+  REQUIRE(x.list[1].is_list(), ERR_type_mismatch, x.list[1], Type::List);
   return Cell(x.list, iEnv, x.err);
 }
 ```
@@ -292,6 +293,7 @@ If it's a Cfp, execute the Cfp with the arg list.
 
 ```cpp
 REQUIRE(f.is_proc(), ERR_type_mismatch, f, Type::Proc);
+REQUIRE(f.list[1].is_list(), ERR_type_mismatch, f.list[1], Type::List);
 REQUIRE(f.list[1].list.size() == args.size(), ERR_arg_count_mismatch, x, false, (I32)f.list[1].list.size(), (I32)args.size());
 g_env.emplace_back(f.list[1].list, args, f.iEnv);
 const Cell& res = eval(f.list[2], I32(g_env.size() - 1));
